@@ -17,7 +17,7 @@ public class Formation {
 
     /**
      * Constructeur
-     * @param pId
+     * @param pId Intitulé de la formation
      */
     public Formation(String pId){
         this.id = pId ;
@@ -26,8 +26,8 @@ public class Formation {
 
     /**
      * Ajoute une matiere si elle n'existe pas déja ou change le coeff si elle existe
-     * @param pMatiere
-     * @param pCoeff
+     * @param pMatiere Nom de la matiere
+     * @param pCoeff Coefficient de la matiere
      */
     public void ajouterMatiere(String pMatiere,float pCoeff){
         if(matieres.containsKey(pMatiere)){
@@ -39,7 +39,7 @@ public class Formation {
 
     /**
      * Supprime une matiere
-     * @param pMatiere
+     * @param pMatiere Nom de la matiere
      */
     public void supprimerMatiere(String pMatiere){
         matieres.remove(pMatiere) ;
@@ -47,8 +47,8 @@ public class Formation {
 
     /**
      * Retourne le coefficient d'une matiere de la formation, -1 si la matiere n'existe pas
-     * @param pMatiere
-     * @return
+     * @param pMatiere Nom de la matiere
+     * @return Coefficient de la matiere
      */
     public float getCoeff(String pMatiere){
         if(matieres.containsKey(pMatiere)) {
@@ -60,7 +60,7 @@ public class Formation {
 
     /**
      * Verifie si la matiere existe dans la formation
-     * @param pMatiere
+     * @param pMatiere Nom de la matiere
      * @return
      */
     public boolean matiereExiste(String pMatiere){

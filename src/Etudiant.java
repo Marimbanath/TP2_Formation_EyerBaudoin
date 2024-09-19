@@ -10,7 +10,7 @@ public class Etudiant {
     //Descriptions d'un Etudiant
     private Identite identite;
     private Formation formation;
-    private TreeMap<String,List<float>> resultats;
+    private TreeMap<String,List<Float>> resultats;
 
     /**
      * Construit un Etudiant
@@ -20,6 +20,7 @@ public class Etudiant {
     public Etudiant(Identite identite, Formation formation) {
         this.identite = identite;
         this.formation = formation;
+        this.resultats = new TreeMap<String, List<Float>>();
     }
 
     /**
@@ -34,10 +35,10 @@ public class Etudiant {
         //Verifie que 0<note<20
         }else if(note>0 || note<20){
             //Agit en fonciton de la presence ou non de la matiere
-            if(!this.resultats.containsKey(matiere)){
+            if(this.resultats.containsKey(matiere)){
                 this.resultats.get(matiere).add(note);
             }else{
-                List<float> l = new ArrayList<float>();
+                List<Float> l = new ArrayList<Float>();
                 l.add(note);
                 this.resultats.put(matiere,l);
             }
@@ -75,7 +76,7 @@ public class Etudiant {
             float somCoef = 0;
             float somRes = 0;
             for(String mat:this.resultats.keySet()){
-                float coeff = this.resultats.get(mat).getCoeff();
+                float coeff = this.formation.getCoeff(mat);
                 float res = 0;
                 int nb = 0;
                 for(float note:this.resultats.get(mat)){

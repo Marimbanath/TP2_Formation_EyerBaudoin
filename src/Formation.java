@@ -30,11 +30,12 @@ public class Formation {
      * @param pCoeff Coefficient de la matiere
      */
     public void ajouterMatiere(String pMatiere,float pCoeff){
+        if(pCoeff<0) pCoeff = 0;
         if(matieres.containsKey(pMatiere)){
-            matieres.replace(pMatiere,pCoeff);
+                matieres.replace(pMatiere,pCoeff);
+        }else{
+            matieres.put(pMatiere, pCoeff);
         }
-
-        matieres.put(pMatiere, pCoeff);
     }
 
     /**
@@ -65,5 +66,9 @@ public class Formation {
      */
     public boolean matiereExiste(String pMatiere){
         return matieres.containsKey(pMatiere) ;
+    }
+
+    public HashMap<String, Float> getMatieres() {
+        return matieres;
     }
 }

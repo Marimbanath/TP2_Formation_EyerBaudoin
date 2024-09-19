@@ -75,7 +75,7 @@ public class Etudiant {
             float somCoef = 0;
             float somRes = 0;
             for(String mat:this.resultats.keySet()){
-                float coeff = this.resultats.get(mat).getCoeff();
+                float coeff = this.formation.getCoeff(mat);
                 float res = 0;
                 int nb = 0;
                 for(float note:this.resultats.get(mat)){

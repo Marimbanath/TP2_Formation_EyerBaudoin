@@ -10,7 +10,7 @@ public class Etudiant {
     //Descriptions d'un Etudiant
     private Identite identite;
     private Formation formation;
-    private TreeMap<String,List<float>> resultats;
+    private TreeMap<String,List<Float>> resultats;
 
     /**
      * Construit un Etudiant
@@ -27,7 +27,7 @@ public class Etudiant {
      * @param matiere matiere recherchée
      * @param note note à ajouter
      */
-    public void ajoutNote(String matiere, float note){
+    public void ajoutNote(String matiere, Float note){
         //Verifie que la matiere existe dans la formation
         if(!this.formation.matiereExiste(matiere)){
             System.err.println("Matière inexistante");
@@ -37,7 +37,7 @@ public class Etudiant {
             if(!this.resultats.containsKey(matiere)){
                 this.resultats.get(matiere).add(note);
             }else{
-                List<float> l = new ArrayList<float>();
+                List<Float> l = new ArrayList<Float>();
                 l.add(note);
                 this.resultats.put(matiere,l);
             }

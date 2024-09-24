@@ -2,8 +2,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class FormationTest {
@@ -28,18 +26,30 @@ class FormationTest {
 
     @Test
     void supprimerMatiere() {
+        //Initialisation
+        formation.supprimerMatiere("QDev");
+        formation.supprimerMatiere("Archi");
+        //Tests
+        assertFalse(formation.matiereExiste("Qdev"));
+        assertFalse(formation.matiereExiste("Archi"));
     }
 
     @Test
     void getCoeff() {
+        assertEquals(-1, formation.getCoeff("QDev"));
+        formation.ajouterMatiere("QDev", 10);
+        assertEquals(10, formation.getCoeff("QDev"));
     }
 
     @Test
     void matiereExiste() {
+        //Initialisation
+        formation.ajouterMatiere("QDev", 10);
+
+        assertTrue(formation.matiereExiste("QDev"));
+        assertFalse(formation.matiereExiste("Pierre-André"));
     }
 
     @AfterEach
-    void after(){
-
-    }
+    void after(){}
 }

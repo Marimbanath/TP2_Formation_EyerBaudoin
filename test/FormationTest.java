@@ -9,16 +9,16 @@ class FormationTest {
     @BeforeEach
     void before(){
         formation = new Formation("Informatique");
+        formation.ajouterMatiere("QDev", 10);
+        formation.ajouterMatiere("Archi", -1000);
     }
 
     @Test
     void ajouterMatiere() {
-        //Initialisation
-        formation.ajouterMatiere("QDev", 10);
-        formation.ajouterMatiere("Archi", -1000);
         //Valeurs à tester
         float test1 = formation.getMatieres().get("QDev");
         float test2 = formation.getMatieres().get("Archi");
+
         //Tests
         assertEquals(10, test1);
         assertEquals(0, test2);
@@ -29,6 +29,7 @@ class FormationTest {
         //Initialisation
         formation.supprimerMatiere("QDev");
         formation.supprimerMatiere("Archi");
+
         //Tests
         assertFalse(formation.matiereExiste("Qdev"));
         assertFalse(formation.matiereExiste("Archi"));

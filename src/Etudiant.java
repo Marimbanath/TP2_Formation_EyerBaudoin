@@ -20,6 +20,7 @@ public class Etudiant {
     public Etudiant(Identite identite, Formation formation) {
         this.identite = identite;
         this.formation = formation;
+        this.resultats = new TreeMap<String, List<Float>>();
     }
 
     /**
@@ -34,7 +35,7 @@ public class Etudiant {
         //Verifie que 0<note<20
         }else if(note>0 || note<20){
             //Agit en fonciton de la presence ou non de la matiere
-            if(!this.resultats.containsKey(matiere)){
+            if(this.resultats.containsKey(matiere)){
                 this.resultats.get(matiere).add(note);
             }else{
                 List<Float> l = new ArrayList<Float>();

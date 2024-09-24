@@ -10,7 +10,7 @@ public class Groupe {
     /**
      * Liste des etudiants d'un groupe
      */
-    private HashSet<Etudiant> groupe ;
+    private final HashSet<Etudiant> groupe ;
     private static Formation formation;
 
     /**
@@ -41,4 +41,27 @@ public class Groupe {
     public void supprimerEtudiant(Etudiant e){
         groupe.remove(e);
     }
+
+    public float calculerMoyenneMatiere(String matiere){
+        float moy = 0; int length = 0;
+        if(formation.matiereExiste(matiere)){
+            for(Etudiant e: groupe){
+                moy += e.calculerMoyenneMatiere(matiere);
+                length++;
+            }
+            return moy/length;
+        }else{
+            return -1;
+        }
+    }
+
+    public float calculerMoyenneGenerale(){
+        float moy = 0; int length = 0;
+        for(Etudiant e:groupe){
+            moy += e.calculerMoyenneGenerale();
+            length++;
+        }
+        return moy/length;
+    }
+
 }

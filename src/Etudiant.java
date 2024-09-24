@@ -93,4 +93,8 @@ public class Etudiant {
             return -1;
         }
     }
+
+    public Formation getFormation() {
+        return formation;
+    }
 }

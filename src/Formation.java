@@ -71,4 +71,8 @@ public class Formation {
     public HashMap<String, Float> getMatieres() {
         return matieres;
     }
+
+    public String getId() {
+        return id;
+    }
 }

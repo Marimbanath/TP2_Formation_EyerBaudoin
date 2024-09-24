@@ -27,7 +27,7 @@ public class Groupe {
      * @param e
      */
     public void ajouterEtudiant(Etudiant e) throws Exception {
-        if(e.getFormation() == formation){
+        if(e.getFormation().getId().equals(formation.getId())){
             groupe.add(e);
         }else{
             throw new Exception("Formation non correspondante");

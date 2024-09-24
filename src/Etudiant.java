@@ -26,9 +26,11 @@ public class Etudiant {
     /**
      * Ajoute une note à une matière si elle existe
      * @param matiere matiere recherchée
-     * @param note note à ajouter
+     * @param pNote note à ajouter
      */
-    public void ajoutNote(String matiere, Float note){
+    public void ajoutNote(String matiere, float pNote){
+
+        Float note = Float.valueOf(pNote) ;
         //Verifie que la matiere existe dans la formation
         if(!this.formation.matiereExiste(matiere)){
             System.err.println("Matière inexistante");

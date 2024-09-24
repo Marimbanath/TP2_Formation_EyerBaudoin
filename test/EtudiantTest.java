@@ -18,7 +18,14 @@ class EtudiantTest {
 
     @org.junit.jupiter.api.Test
     void ajoutNote() {
-        e.ajoutNote("Math",10);
+        boolean erreur = false ;
+        try {
+            e.ajoutNote("Math", 10);
+        } catch(Exception e){
+            erreur = true ;
+        }
+
+        assertEquals(erreur,false);
     }
 
     @org.junit.jupiter.api.Test

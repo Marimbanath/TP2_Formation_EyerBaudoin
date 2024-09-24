@@ -28,14 +28,14 @@ public class Etudiant {
      * @param matiere matiere recherchée
      * @param pNote note à ajouter
      */
-    public void ajoutNote(String matiere, float pNote){
+    public void ajoutNote(String matiere, float pNote) throws Exception {
 
         Float note = Float.valueOf(pNote) ;
         //Verifie que la matiere existe dans la formation
         if(!this.formation.matiereExiste(matiere)){
-            System.err.println("Matière inexistante");
+            throw new Exception("Matière inexistante dans la formation") ;
         //Verifie que 0<note<20
-        }else if(note>0 || note<20){
+        }else if(note>=0 && note<=20){
             //Agit en fonciton de la presence ou non de la matiere
             if(this.resultats.containsKey(matiere)){
                 this.resultats.get(matiere).add(note);
@@ -46,7 +46,7 @@ public class Etudiant {
             }
         //Erreur de note
         }else{
-            System.err.println("Note incorrecte");
+            throw new Exception("Note à l'exterieur des bornes");
         }
     }
 
@@ -57,8 +57,7 @@ public class Etudiant {
      */
     public float calculerMoyenneMatiere(String matiere){
         if(!this.formation.matiereExiste(matiere)){
-            System.err.println("Matiere inexistante");
-            return -1;
+            return -1 ;
         }
         if(this.resultats.containsKey(matiere)){
             float res = 0;
@@ -74,24 +73,20 @@ public class Etudiant {
     }
 
     public float calculerMoyenneGenerale(){
-        if(!this.resultats.isEmpty()){
-            float somCoef = 0;
-            float somRes = 0;
-            for(String mat:this.resultats.keySet()){
-                float coeff = this.formation.getCoeff(mat);
-                float res = 0;
-                int nb = 0;
-                for(float note:this.resultats.get(mat)){
-                    res += note;
-                    nb++;
-                }
-                somRes = res/nb*coeff;
-                somCoef += coeff;
-            }
-            return somRes / somCoef;
-        }else{
+        if(this.resultats.isEmpty()) {
             return -1;
         }
+
+        float sommeCoeff = 0;
+        float sommeResultat = 0;
+        float coeffMatiere ;
+
+        for(String matiere:this.resultats.keySet()){
+            coeffMatiere = this.formation.getCoeff(matiere) ;
+            sommeCoeff += coeffMatiere ;
+            sommeResultat += calculerMoyenneMatiere(matiere) * coeffMatiere ;
+        }
+        return sommeResultat / sommeCoeff;
     }
 
     public Formation getFormation() {

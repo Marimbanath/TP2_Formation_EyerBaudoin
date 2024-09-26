@@ -72,6 +72,10 @@ public class Etudiant {
         }
     }
 
+    /**
+     * Calcule la moyenne générale d'un Etudiant
+     * @return moyenne générale
+     */
     public float calculerMoyenneGenerale(){
         if(this.resultats.isEmpty()) {
             return -1;
@@ -89,7 +93,20 @@ public class Etudiant {
         return sommeResultat / sommeCoeff;
     }
 
+    /**
+     * @return formation
+     */
     public Formation getFormation() {
         return formation;
     }
+
+    /**
+     * @return identite
+     */
+    public Identite getIdentite() {return identite;}
+
+    /**
+     * @return identite
+     */
+    public TreeMap<String, List<Float>> getResultats() {return resultats;}
 }

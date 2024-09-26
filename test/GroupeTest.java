@@ -9,6 +9,10 @@ class GroupeTest {
     private Identite i1;
     private Formation f1;
     private Etudiant e1;
+
+    /**
+     * Initialisations
+     */
     @BeforeEach
     void before(){
         i1 = new Identite("ABC", "Baudoin", "Mathieu");
@@ -19,6 +23,9 @@ class GroupeTest {
         g = new Groupe(f1);
     }
 
+    /**
+     * Test de la méthode d'ajout d'un Etudiant
+     */
     @Test
     void ajouterEtudiant(){
         //Initialisations
@@ -29,12 +36,19 @@ class GroupeTest {
         assertThrows(Exception.class, () -> {g.ajouterEtudiant(e2);});
     }
 
+    /**
+     * Test de la méthode de suppression d'un Etudiant
+     */
     @Test
     void supprimerEtudiant(){
         assertDoesNotThrow(() -> {g.ajouterEtudiant(e1);});
         assertDoesNotThrow(() -> {g.supprimerEtudiant(e1);});
     }
 
+    /**
+     * Test de la méthode de calcul d'une moyenne dans une matiere
+     * @throws Exception .
+     */
     @Test
     void calculerMoyenneMatiere() throws Exception {
         Etudiant e2 = new Etudiant(i1, f1);
@@ -55,6 +69,10 @@ class GroupeTest {
         assertEquals(12.5, g.calculerMoyenneMatiere("qdev"));
     }
 
+    /**
+     * Test de la méthode de calcul d'une moyenne générale
+     * @throws Exception .
+     */
     @Test
     void calculerMoyenneGenerale() throws Exception {
         Etudiant e2 = new Etudiant(i1, f1);
@@ -73,10 +91,5 @@ class GroupeTest {
         g.ajouterEtudiant(e4);
 
         assertEquals(9.375, g.calculerMoyenneGenerale());
-    }
-
-    @AfterEach
-    void after(){
-
     }
 }

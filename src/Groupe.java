@@ -6,7 +6,6 @@ import java.util.HashSet;
  * Represente un groupe d'etudiant
  */
 public class Groupe {
-
     /**
      * Liste des etudiants d'un groupe
      */
@@ -24,7 +23,7 @@ public class Groupe {
 
     /**
      * Permet d'ajouter un etudiant de la meme formation
-     * @param e
+     * @param e Etudiant à ajouter
      */
     public void ajouterEtudiant(Etudiant e) throws Exception {
         if(e.getFormation().getId().equals(formation.getId())){
@@ -55,6 +54,10 @@ public class Groupe {
         }
     }
 
+    /**
+     * Calcule la moyenne générale d'un Etudiant
+     * @return moyenne générale
+     */
     public float calculerMoyenneGenerale(){
         float moy = 0; int length = 0;
         for(Etudiant e:groupe){

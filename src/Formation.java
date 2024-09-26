@@ -68,10 +68,16 @@ public class Formation {
         return matieres.containsKey(pMatiere) ;
     }
 
+    /**
+     * @return matieres
+     */
     public HashMap<String, Float> getMatieres() {
         return matieres;
     }
 
+    /**
+     * @return id
+     */
     public String getId() {
         return id;
     }

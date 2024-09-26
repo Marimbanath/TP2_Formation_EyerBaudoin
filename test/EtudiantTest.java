@@ -1,12 +1,14 @@
-import java.text.Normalizer;
-
+import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
 
 class EtudiantTest {
 
-    Etudiant e ;
+    private Etudiant e ;
 
-    @org.junit.jupiter.api.BeforeEach
+    /**
+     * Initialisation
+     */
+    @BeforeEach
     void setUp() {
         Identite i = new Identite("1234","Doe","John") ;
         Formation f = new Formation("BUT") ;
@@ -16,35 +18,41 @@ class EtudiantTest {
         e = new Etudiant(i,f) ;
     }
 
+    /**
+     * Test de la méthode d'ajout d'une note
+     */
     @org.junit.jupiter.api.Test
     void ajoutNote() {
 
         boolean erreur = false ;
         try { e.ajoutNote("Math", 10); }
         catch(Exception e){ erreur = true ; }
-        assertEquals(false,erreur);
+        assertFalse(erreur);
 
         erreur = false ;
         try { e.ajoutNote("Anglais", 10); }
         catch(Exception e){ erreur = true ; }
-        assertEquals(false,erreur);
+        assertFalse(erreur);
 
         erreur = false ;
         try { e.ajoutNote("Math", -1); }
         catch(Exception e){ erreur = true ; }
-        assertEquals(true,erreur);
+        assertTrue(erreur);
 
         erreur = false ;
         try { e.ajoutNote("Math", 21); }
         catch(Exception e){ erreur = true ; }
-        assertEquals(true,erreur);
+        assertTrue(erreur);
 
         erreur = false ;
         try { e.ajoutNote("Test", 10); }
         catch(Exception e){ erreur = true ; }
-        assertEquals(true,erreur);
+        assertTrue(erreur);
     }
 
+    /**
+     * Test de la méthode de calcul de moyenne dans un matière
+     */
     @org.junit.jupiter.api.Test
     void calculerMoyenneMatiere() {
         try {
@@ -57,6 +65,9 @@ class EtudiantTest {
         assertEquals(15,e.calculerMoyenneMatiere("Math"));
     }
 
+    /**
+     * Test de la méthode de calcul de moyenne générale
+     */
     @org.junit.jupiter.api.Test
     void calculerMoyenneGenerale() {
         try {

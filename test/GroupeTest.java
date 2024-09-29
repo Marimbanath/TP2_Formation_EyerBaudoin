@@ -3,29 +3,31 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GroupeTest {
     private Groupe g;
     private Identite i1;
-    private Formation f1;
+    private Identite i2;
+    private Identite i3;
     private Etudiant e1;
+    private Etudiant e2;
+    private Etudiant e3;
 
-    /**
-     * Initialisations
-     */
     @BeforeEach
     void before(){
         i1 = new Identite("ABC", "Baudoin", "Mathieu");
-        f1 = new Formation("test");
-        f1.ajouterMatiere("qdev", 3);
-        f1.ajouterMatiere("test", 5);
+        i2 = new Identite("BCD", "Eyer", "Nathan");
+        i3 = new Identite("CDE", "Doe", "John");
+        Formation f1 = new Formation("test");
+
         e1 = new Etudiant(i1, f1);
+        e2 = new Etudiant(i2, f1);
+        e3 = new Etudiant(i3, f1);
+
         g = new Groupe(f1);
     }
 
-    /**
-     * Test de la méthode d'ajout d'un Etudiant
-     */
     @Test
     void ajouterEtudiant(){
         //Initialisations
@@ -36,60 +38,42 @@ class GroupeTest {
         assertThrows(Exception.class, () -> {g.ajouterEtudiant(e2);});
     }
 
-    /**
-     * Test de la méthode de suppression d'un Etudiant
-     */
     @Test
     void supprimerEtudiant(){
         assertDoesNotThrow(() -> {g.ajouterEtudiant(e1);});
         assertDoesNotThrow(() -> {g.supprimerEtudiant(e1);});
     }
 
-    /**
-     * Test de la méthode de calcul d'une moyenne dans une matiere
-     * @throws Exception .
-     */
     @Test
-    void calculerMoyenneMatiere() throws Exception {
-        Etudiant e2 = new Etudiant(i1, f1);
-        Etudiant e3 = new Etudiant(i1, f1);
-        Etudiant e4 = new Etudiant(i1, f1);
+    void triAlpha(){
+        try {
+            g.ajouterEtudiant(e1);
+            g.ajouterEtudiant(e2);
+            g.ajouterEtudiant(e3);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
-        e1.ajoutNote("qdev", 5);
-        e2.ajoutNote("qdev", 10);
-        e3.ajoutNote("qdev", 15);
-        e4.ajoutNote("qdev", 20);
-        e4.ajoutNote("test", 0);
-
-        g.ajouterEtudiant(e1);
-        g.ajouterEtudiant(e2);
-        g.ajouterEtudiant(e3);
-        g.ajouterEtudiant(e4);
-
-        assertEquals(12.5, g.calculerMoyenneMatiere("qdev"));
+        g.triAlpha();
+        assertEquals(g.toString(),"Baudoin Doe Eyer ") ;
     }
 
-    /**
-     * Test de la méthode de calcul d'une moyenne générale
-     * @throws Exception .
-     */
     @Test
-    void calculerMoyenneGenerale() throws Exception {
-        Etudiant e2 = new Etudiant(i1, f1);
-        Etudiant e3 = new Etudiant(i1, f1);
-        Etudiant e4 = new Etudiant(i1, f1);
+    void triAntiAlpha(){
+        try {
+            g.ajouterEtudiant(e1);
+            g.ajouterEtudiant(e2);
+            g.ajouterEtudiant(e3);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
-        e1.ajoutNote("qdev", 5);
-        e2.ajoutNote("qdev", 10);
-        e3.ajoutNote("qdev", 15);
-        e4.ajoutNote("qdev", 20);
-        e4.ajoutNote("test", 0);
+        g.triAntiAlpha();
+        assertEquals(g.toString(),"Eyer Doe Baudoin ") ;
+    }
 
-        g.ajouterEtudiant(e1);
-        g.ajouterEtudiant(e2);
-        g.ajouterEtudiant(e3);
-        g.ajouterEtudiant(e4);
+    @AfterEach
+    void after(){
 
-        assertEquals(9.375, g.calculerMoyenneGenerale());
     }
 }

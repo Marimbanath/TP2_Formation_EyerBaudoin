@@ -1,15 +1,15 @@
-import java.security.cert.CertificateRevokedException;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.List;
 
 /**
  * Represente un groupe d'etudiant
  */
 public class Groupe {
+
     /**
      * Liste des etudiants d'un groupe
      */
-    private final HashSet<Etudiant> groupe ;
+    private List<Etudiant> groupe ;
     private static Formation formation;
 
     /**
@@ -17,13 +17,13 @@ public class Groupe {
      * @param f formation du groupe
      */
     public Groupe(Formation f){
-        groupe = new HashSet<Etudiant>() ;
+        groupe = new ArrayList<Etudiant>() ;
         formation = f;
     }
 
     /**
      * Permet d'ajouter un etudiant de la meme formation
-     * @param e Etudiant à ajouter
+     * @param e
      */
     public void ajouterEtudiant(Etudiant e) throws Exception {
         if(e.getFormation().getId().equals(formation.getId())){
@@ -41,30 +41,45 @@ public class Groupe {
         groupe.remove(e);
     }
 
-    public float calculerMoyenneMatiere(String matiere){
-        float moy = 0; int length = 0;
-        if(formation.matiereExiste(matiere)){
-            for(Etudiant e: groupe){
-                moy += e.calculerMoyenneMatiere(matiere);
-                length++;
+    /**
+     * Trie les étudiant du groupe dans l'ordre alphabétique
+     */
+    public void triAlpha(){
+        Etudiant tmp ;
+
+        for (int i = 1; i < groupe.size(); i++) {
+            tmp = groupe.get(i);
+            int j = i - 1;
+            while ((j >= 0) && (groupe.get(j).getNom().compareTo(tmp.getNom()))>0) {
+                groupe.set(j + 1,groupe.get(j));
+                j = j - 1;
             }
-            return moy/length;
-        }else{
-            return -1;
+            groupe.set(j + 1,tmp);
         }
     }
 
     /**
-     * Calcule la moyenne générale d'un Etudiant
-     * @return moyenne générale
+     * Trie les étudiants dans l'ordre anti-alphabétique
      */
-    public float calculerMoyenneGenerale(){
-        float moy = 0; int length = 0;
-        for(Etudiant e:groupe){
-            moy += e.calculerMoyenneGenerale();
-            length++;
+    public void triAntiAlpha(){
+        Etudiant tmp ;
+
+        for (int i = 1; i < groupe.size(); i++) {
+            tmp = groupe.get(i);
+            int j = i - 1;
+            while ((j >= 0) && (groupe.get(j).getNom().compareTo(tmp.getNom()))<=0) {
+                groupe.set(j + 1,groupe.get(j));
+                j = j - 1;
+            }
+            groupe.set(j + 1,tmp);
         }
-        return moy/length;
     }
 
+    public String toString(){
+        String ret = "";
+        for(int i = 0 ; i < groupe.size() ; i++){
+            ret += groupe.get(i).getNom() + " ";
+        }
+        return ret ;
+    }
 }

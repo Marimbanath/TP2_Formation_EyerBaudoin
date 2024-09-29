@@ -92,4 +92,8 @@ public class Etudiant {
     public Formation getFormation() {
         return formation;
     }
+
+    public String getNom(){
+        return this.identite.getNom();
+    }
 }
